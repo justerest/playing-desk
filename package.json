@@ -1,0 +1,41 @@
+{
+  "name": "test123",
+  "version": "1.0.0",
+  "description": "",
+  "main": "false",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StathamJason/test123.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StathamJason/test123/issues"
+  },
+  "homepage": "https://github.com/StathamJason/test123#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "bootstrap-loader": "^2.2.0",
+    "bootstrap-sass": "^3.3.7",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.5",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.5.3",
+    "resolve-url-loader": "^2.1.0",
+    "rimraf": "^2.6.1",
+    "sass-loader": "^6.0.6",
+    "style-ext-html-webpack-plugin": "^3.4.1",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
+  }
+}
