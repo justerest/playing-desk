@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 
 module.exports = {
-  entry: ['bootstrap-loader', './src/main.js'],
+  entry: ['./index.js'],
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
@@ -54,11 +54,6 @@ module.exports = {
     hints: false
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery"
-    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
@@ -91,7 +86,7 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false }
     }),
-    new StyleExtHtmlWebpackPlugin(),
+    // new StyleExtHtmlWebpackPlugin(),
     new webpack.LoaderOptionsPlugin({ minimize: true })
   ])
 }
