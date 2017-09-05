@@ -1,22 +1,44 @@
-const CARD_SUITS = ['clubs', 'diamonds', 'hearts', 'spades'];
+const CARD_SUITS = ['clubs', 'hearts', 'spades', 'diamonds'];
 const DESK_LENGTH = 36;
 const GROUP_LENGTH = DESK_LENGTH / 4;
 
+class PlayingCard {
+  constructor(value, suit) {
+    return Object.assign(this, { value, suit });
+  }
+
+  get cost() {
+    return (
+      this.value === 8 ? 'Ace' :
+      this.value === 7 ? 'King' :
+      this.value === 6 ? 'Queen' :
+      this.value === 5 ? 'Jack' :
+      this.value + 6
+    );
+  }
+  set cost(cost) {
+    this.value = (
+      cost === 'Ace' ? 8 :
+      cost === 'King' ? 7 :
+      cost === 'Queen' ? 6 :
+      cost === 'Jack' ? 5 :
+      cost - 6
+    );
+  }
+
+  get suitNumber() {
+    return CARD_SUITS.findIndex(suit => suit === this.suit);
+  }
+}
+
 const desk = new Array(DESK_LENGTH)
   .fill()
-  .map((card, i) => {
+  .map((elem, i) => {
     const value = i % GROUP_LENGTH;
-    return {
-      cost: (
-        value === 8 ? 'Ace' :
-        value === 7 ? 'King' :
-        value === 6 ? 'Queen' :
-        value === 5 ? 'Jack' :
-        value + 6
-      ),
-      suit: CARD_SUITS[parseInt(i / GROUP_LENGTH)]
-    };
-  });
+    const suit = CARD_SUITS[parseInt(i / GROUP_LENGTH)];
+    return new PlayingCard(value, suit);
+  })
+  .sort(() => randomInt(-1, 2))
 
 window.onload = () => {
   const takedCardsContainer = document.querySelector('.taked-cards');
@@ -29,10 +51,12 @@ window.onload = () => {
 
     const [takedCard] = desk.splice(randomInt(0, desk.length), 1);
     const card = document.createElement('li');
-    card.classList.add(takedCard.cost, takedCard.suit);
-    card.innerHTML = JSON.stringify(takedCard);
-    card.style.backgroundPositionX = '800px';
-    card.style.backgroundPositionY = '1100px';
+    card.classList.add(
+      'playing-card',
+      '-value-' + takedCard.value,
+      '-suit-' + takedCard.suitNumber
+    );
+    card.innerHTML = takedCard.cost + ' of ' + takedCard.suit;
     takedCardsContainer.appendChild(card);
   };
 }
@@ -44,9 +68,9 @@ function randomInt(min, max) {
 // Масти:
 //
 //     Трефы — clubs
-//     Бубны — diamonds
 //     Червы — hearts
 //     Пики — spades
+//     Бубны — diamonds
 //
 // Достоинства:
 //

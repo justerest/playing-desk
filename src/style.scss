@@ -5,13 +5,27 @@ body {
 .taked-cards {
   margin-top: 15px;
 
-  li {
+  .playing-card {
     position: relative;
     float: left;
     width: 200px;
     height: 300px;
     margin: 10px;
     background-image: url('./icons/desk.svg');
-    color: transparent;
+    background-size: 3500px;
+    @for $value from 0 through 7 {
+      &.-value-#{$value} {
+        background-position-x: 2063.5px - 213.5px * $value;
+      }
+    }
+
+    &.-value-8 {
+      background-position-x: 2063.5px + 213.5px * 5;
+    }
+    @for $suitNumber from 0 through 3 {
+      &.-suit-#{$suitNumber} {
+        background-position-y: 1763.5px - 285px * $suitNumber;
+      }
+    }
   }
 }
