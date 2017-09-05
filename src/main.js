@@ -1,36 +1,43 @@
-import PlayingCard from './models/PlayingCard';
-import { CARD_SUITS, DESK_LENGTH, GROUP_LENGTH } from './constants';
+import Desk from '@/models/Desk';
+import randomInt from '@/utils/randomInt';
 
-const desk = new Array(DESK_LENGTH)
-  .fill()
-  .map((elem, i) => {
-    const value = i % GROUP_LENGTH;
-    const suit = CARD_SUITS[parseInt(i / GROUP_LENGTH)];
-    return new PlayingCard(value, suit);
-  })
-  .sort(() => randomInt(-1, 2))
+const desk = new Desk;
 
 window.onload = () => {
-  const takedCardsContainer = document.querySelector('.taked-cards');
+  const takedCardsContainer = document.querySelector('.b-taked-cards');
 
-  document.querySelector('button').onclick = () => {
-    if (!desk.length) {
-      alert('Карты кончились!');
-      return;
-    }
+  document
+    .querySelector('button#takeRandomCard')
+    .addEventListener('click', () => insertElement(desk.takeRandomCard()));
 
-    const [takedCard] = desk.splice(randomInt(0, desk.length), 1);
+  document
+    .querySelector('button#takeCard')
+    .addEventListener('click', () => insertElement(desk.takeCard()));
+
+  document
+    .querySelector('button#shuffleDesk')
+    .addEventListener('click', () => desk.shuffle());
+
+  document
+    .querySelectorAll('button')
+    .forEach(button => button
+      .addEventListener('click', event => {
+        if (!desk.length) {
+          event.stopPropagation();
+          alert('Карты кончились!');
+          document.querySelector('.b-panel').classList.add('-disabled');
+          confirm('Ещё раз?') && location.reload();
+        }
+      }));
+
+  function insertElement(takedCard) {
     const card = document.createElement('li');
     card.classList.add(
       'playing-card',
       '-value-' + takedCard.value,
       '-suit-' + takedCard.suitNumber
     );
-    card.innerHTML = takedCard.cost + ' of ' + takedCard.suit;
+    card.innerHTML = takedCard.name;
     takedCardsContainer.appendChild(card);
-  };
-}
-
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+  }
 }

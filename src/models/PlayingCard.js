@@ -15,6 +15,10 @@ export default class PlayingCard {
     );
   }
 
+  get name() {
+    return this.cost + ' of ' + this.suit;
+  }
+
   get suitNumber() {
     return CARD_SUITS.findIndex(suit => suit === this.suit);
   }

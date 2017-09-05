@@ -1,9 +1,38 @@
+$pt: 50px;
+
 body {
+  padding-top: $pt;
   background-color: #ddd;
 }
 
-.taked-cards {
+.b-panel {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: $pt;
+  background-color: rgba(#fff, .5);
+  box-shadow: 0 1px 1px rgba(#000, .5);
+
+  &__button {
+    margin: 0 10px;
+  }
+
+  &.-disabled {
+    pointer-events: none;
+    opacity: .5;
+  }
+}
+
+.b-taked-cards {
   margin-top: 15px;
+  list-style: none;
+  text-align: center;
+  font-weight: bold;
 
   .playing-card {
     position: relative;
