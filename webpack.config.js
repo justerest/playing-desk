@@ -75,7 +75,7 @@ if (process.env.NODE_ENV === 'production') {
     if (err) throw err;
   });
 
-  module.exports.output.publicPath = './';
+  // module.exports.output.publicPath = './';
 
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({

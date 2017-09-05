@@ -1,35 +1,5 @@
-const CARD_SUITS = ['clubs', 'hearts', 'spades', 'diamonds'];
-const DESK_LENGTH = 36;
-const GROUP_LENGTH = DESK_LENGTH / 4;
-
-class PlayingCard {
-  constructor(value, suit) {
-    return Object.assign(this, { value, suit });
-  }
-
-  get cost() {
-    return (
-      this.value === 8 ? 'Ace' :
-      this.value === 7 ? 'King' :
-      this.value === 6 ? 'Queen' :
-      this.value === 5 ? 'Jack' :
-      this.value + 6
-    );
-  }
-  set cost(cost) {
-    this.value = (
-      cost === 'Ace' ? 8 :
-      cost === 'King' ? 7 :
-      cost === 'Queen' ? 6 :
-      cost === 'Jack' ? 5 :
-      cost - 6
-    );
-  }
-
-  get suitNumber() {
-    return CARD_SUITS.findIndex(suit => suit === this.suit);
-  }
-}
+import PlayingCard from './models/PlayingCard';
+import { CARD_SUITS, DESK_LENGTH, GROUP_LENGTH } from './constants';
 
 const desk = new Array(DESK_LENGTH)
   .fill()
@@ -64,17 +34,3 @@ window.onload = () => {
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
-
-// Масти:
-//
-//     Трефы — clubs
-//     Червы — hearts
-//     Пики — spades
-//     Бубны — diamonds
-//
-// Достоинства:
-//
-//     «В» = «J» — Jack
-//     «Д» = «Q» — Queen
-//     «К» = «K» — King
-//     «Т» = «A» — Ace
