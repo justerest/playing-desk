@@ -61,13 +61,13 @@ body {
       }
 
       &.-cost-#{$name} {
-        background-position-x: 2063.5px - 213.5px * $value;
+        background-position-x: 2063.5px - $value * 213.5px;
       }
     }
     //
     @each $suit, $i in (clubs: 0, hearts: 1, spades: 2, diamonds: 3) {
       &.-suit-#{$suit} {
-        background-position-y: 1763.5px - 285px * $i;
+        background-position-y: 1763.5px - $i * 285px;
       }
     }
   }
