@@ -1,15 +1,24 @@
 import PlayingCard from '@/models/PlayingCard';
 import randomInt from '@/utils/randomInt';
-import { CARD_SUITS, DESK_LENGTH, GROUP_LENGTH } from '@/store/constants';
+import { CARD_SUITS, DESK_LENGTH } from '@/store/constants';
+
+const GROUP_LENGTH_DEFAULT = DESK_LENGTH / CARD_SUITS.length;
 
 export default class Desk extends Array {
-  constructor() {
+  constructor(length = DESK_LENGTH) {
+    const groupLength = length / CARD_SUITS.length;
+    if (groupLength !== parseInt(groupLength)) {
+      throw new Error('Неправильный набор карт!');
+    }
+
     super(
-      ...new Array(DESK_LENGTH)
+      ...new Array(length)
       .fill()
       .map((elem, i) => {
-        const value = i % GROUP_LENGTH;
-        const suit = CARD_SUITS[parseInt(i / GROUP_LENGTH)];
+        let value = i % groupLength;
+        value += 2;
+        value += GROUP_LENGTH_DEFAULT - groupLength;
+        const suit = CARD_SUITS[parseInt(i / groupLength)];
         return new PlayingCard(value, suit);
       })
     );

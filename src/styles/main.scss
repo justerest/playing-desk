@@ -33,42 +33,4 @@ body {
   list-style: none;
   text-align: center;
   font-weight: bold;
-
-  &__playing-card {
-    position: relative;
-    float: left;
-    width: 200px;
-    height: 300px;
-    margin: 10px;
-    text-transform: capitalize;
-    background-image: url('~@/images/desk.svg');
-    background-size: 3500px;
-    //
-    @for $value from 0 through 8 {
-      $name: $value + 6;
-      @if $value == 8 {
-        $name: 'ace';
-        $value: -5;
-      }
-      @else if $value == 7 {
-        $name: 'king';
-      }
-      @else if $value == 6 {
-        $name: 'queen';
-      }
-      @else if $value == 5 {
-        $name: 'jack';
-      }
-
-      &.-cost-#{$name} {
-        background-position-x: 2063.5px - $value * 213.5px;
-      }
-    }
-    //
-    @each $suit, $i in (clubs: 0, hearts: 1, spades: 2, diamonds: 3) {
-      &.-suit-#{$suit} {
-        background-position-y: 1763.5px - $i * 285px;
-      }
-    }
-  }
 }

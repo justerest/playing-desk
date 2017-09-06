@@ -6,12 +6,18 @@ window.onload = () => {
   const takenCardsContainer = document.querySelector('#takenCardsContainer');
 
   document
-    .querySelector('button#takeRandomCard')
-    .addEventListener('click', () => insertElement(desk.takeRandomCard()));
+    .querySelector('button#takeCard')
+    .addEventListener('click', () => {
+      const cardHtml = desk.takeCard().createElement();
+      takenCardsContainer.appendChild(cardHtml);
+    });
 
   document
-    .querySelector('button#takeCard')
-    .addEventListener('click', () => insertElement(desk.takeCard()));
+    .querySelector('button#takeRandomCard')
+    .addEventListener('click', () => {
+      const cardHtml = desk.takeRandomCard().createElement();
+      takenCardsContainer.appendChild(cardHtml);
+    });
 
   document
     .querySelector('button#shuffleDesk')
@@ -27,15 +33,4 @@ window.onload = () => {
         setTimeout(() => confirm('Ещё раз?') && location.reload());
       }
     }));
-
-  function insertElement(takedCard) {
-    const card = document.createElement('li');
-    card.classList.add(
-      'b-view__playing-card',
-      '-cost-' + takedCard.cost,
-      '-suit-' + takedCard.suit
-    );
-    card.innerHTML = takedCard.name;
-    takenCardsContainer.appendChild(card);
-  }
 };
