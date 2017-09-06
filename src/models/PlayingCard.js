@@ -1,5 +1,3 @@
-import { CARD_SUITS } from '@/constants';
-
 export default class PlayingCard {
   constructor(value, suit) {
     return Object.assign(this, { value, suit });
@@ -7,10 +5,10 @@ export default class PlayingCard {
 
   get cost() {
     return (
-      this.value === 8 ? 'Ace' :
-      this.value === 7 ? 'King' :
-      this.value === 6 ? 'Queen' :
-      this.value === 5 ? 'Jack' :
+      this.value === 8 ? 'ace' :
+      this.value === 7 ? 'king' :
+      this.value === 6 ? 'queen' :
+      this.value === 5 ? 'jack' :
       this.value + 6
     );
   }
@@ -18,11 +16,7 @@ export default class PlayingCard {
   get name() {
     return this.cost + ' of ' + this.suit;
   }
-
-  get suitNumber() {
-    return CARD_SUITS.findIndex(suit => suit === this.suit);
-  }
-};
+}
 
 // Достоинства:
 //

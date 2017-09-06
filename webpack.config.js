@@ -1,8 +1,9 @@
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
+// IDEA:
+// const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
 
 module.exports = {
   entry: ['./index.js'],
@@ -66,7 +67,7 @@ module.exports = {
     }),
     new ExtractTextPlugin('css/styles.css')
   ]
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
   var rm = require('rimraf');
@@ -75,6 +76,7 @@ if (process.env.NODE_ENV === 'production') {
     if (err) throw err;
   });
 
+  // IDEA:
   // module.exports.output.publicPath = './';
 
   module.exports.plugins = (module.exports.plugins || []).concat([
@@ -86,7 +88,8 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false }
     }),
+    // IDEA:
     // new StyleExtHtmlWebpackPlugin(),
     new webpack.LoaderOptionsPlugin({ minimize: true })
-  ])
+  ]);
 }

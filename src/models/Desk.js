@@ -1,6 +1,6 @@
 import PlayingCard from '@/models/PlayingCard';
 import randomInt from '@/utils/randomInt';
-import { CARD_SUITS, DESK_LENGTH, GROUP_LENGTH } from '@/constants';
+import { CARD_SUITS, DESK_LENGTH, GROUP_LENGTH } from '@/store/constants';
 
 export default class Desk extends Array {
   constructor() {
@@ -14,16 +14,22 @@ export default class Desk extends Array {
       })
     );
 
-    this.takeCard = function() {
-      return this.splice(0, 1)[0];
-    }
+    // REVIEW:
+    // Не получается определить методы класса в стандартном порядке.
+    // Наверно, потому что это массив, а не объект.
 
-    this.takeRandomCard = function() {
-      return this.splice(randomInt(0, this.length), 1)[0];
-    }
+    Object.assign(this, {
+      takeCard() {
+        return this.splice(0, 1)[0];
+      },
 
-    this.shuffle = function() {
-      return this.sort(() => randomInt(-1, 2));
-    }
+      takeRandomCard() {
+        return this.splice(randomInt(0, this.length), 1)[0];
+      },
+
+      shuffle() {
+        return this.sort(() => randomInt(-1, 2));
+      }
+    });
   }
 }

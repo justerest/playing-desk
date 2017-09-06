@@ -1,10 +1,9 @@
 import Desk from '@/models/Desk';
-import randomInt from '@/utils/randomInt';
 
 const desk = new Desk;
 
 window.onload = () => {
-  const takedCardsContainer = document.querySelector('.b-taked-cards');
+  const takenCardsContainer = document.querySelector('#takenCardsContainer');
 
   document
     .querySelector('button#takeRandomCard')
@@ -20,24 +19,23 @@ window.onload = () => {
 
   document
     .querySelectorAll('button')
-    .forEach(button => button
-      .addEventListener('click', event => {
-        if (!desk.length) {
-          event.stopPropagation();
-          alert('Карты кончились!');
-          document.querySelector('.b-panel').classList.add('-disabled');
-          confirm('Ещё раз?') && location.reload();
-        }
-      }));
+    .forEach(button => button.addEventListener('click', event => {
+      if (!desk.length) {
+        event.stopPropagation();
+        document.querySelector('.b-panel').classList.add('-disabled');
+        setTimeout(alert('Карты кончились!'));
+        setTimeout(() => confirm('Ещё раз?') && location.reload());
+      }
+    }));
 
   function insertElement(takedCard) {
     const card = document.createElement('li');
     card.classList.add(
-      'playing-card',
-      '-value-' + takedCard.value,
-      '-suit-' + takedCard.suitNumber
+      'b-view__playing-card',
+      '-cost-' + takedCard.cost,
+      '-suit-' + takedCard.suit
     );
     card.innerHTML = takedCard.name;
-    takedCardsContainer.appendChild(card);
+    takenCardsContainer.appendChild(card);
   }
-}
+};
